@@ -1,6 +1,8 @@
 ﻿using HtmlAgilityPack;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using NwlEmployeeConsole.Bussines;
 using NwlEmployeeConsole.Models;
 using System;
@@ -44,12 +46,13 @@ namespace NwlEmployeeConsole.Controllers
         }
 
         [HttpPost]
-        public string SearchResult(string wordKey)
+        public ContentResult RenapoData(string wordKey)
         {
+
             var renapoInfo = new RenapoInfo();
             var jsonString = renapoInfo.GetData(wordKey);
 
-            return jsonString;
+            return Content(jsonString, "application/json");
         }
             
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
