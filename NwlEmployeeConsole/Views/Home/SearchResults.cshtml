@@ -1,0 +1,36 @@
+﻿@model NwlEmployeeConsole.Models.SearchModel
+@{
+
+    ViewBag.Title = "Home Page";
+    var x = Model.WordKey;
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th colspan="2" align="center">Search Keyword:</th>
+            </tr>
+            <tr>
+
+                <td>
+                    @Model.WordKey
+                </td>
+
+            </tr>
+
+        </table>
+
+
+    </div>
+</body>
+</html>
