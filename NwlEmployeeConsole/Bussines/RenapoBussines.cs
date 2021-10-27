@@ -1,6 +1,8 @@
 ﻿using HtmlAgilityPack;
+using Newtonsoft.Json;
 using NwlEmployeeConsole.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -25,6 +27,9 @@ namespace NwlEmployeeConsole.Bussines
             string[] datos = text.Split("\r\n");
             var s2 = datos[17].Trim();
             var ap2 = Encoding.GetEncoding("iso-8859-1").GetString(Encoding.GetEncoding("iso-8859-1").GetBytes(s2));
+
+            List<Renapo> renapoList = new List<Renapo>();
+
             var renapo = new Renapo
             {
                 AnioReg = datos[8].Trim(),
@@ -50,8 +55,16 @@ namespace NwlEmployeeConsole.Bussines
                 Tomo = datos[89].Trim()
             };
 
-            string jsonString = JsonSerializer.Serialize(renapo);
-            return jsonString;
+            renapoList.Add(renapo);
+
+            var dataJsonTable = new DataTableJsonModel()
+            {
+                DataJson = renapoList
+            };
+           
+            var json = JsonConvert.SerializeObject(dataJsonTable, Formatting.Indented);
+            
+            return json;
         }
 
 

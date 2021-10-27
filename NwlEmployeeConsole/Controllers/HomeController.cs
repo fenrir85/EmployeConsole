@@ -45,7 +45,7 @@ namespace NwlEmployeeConsole.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpGet]
         public ContentResult RenapoData(string wordKey)
         {
 

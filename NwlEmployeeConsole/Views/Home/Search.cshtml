@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Home Page";
     var x = Model.WordKey;
-
 }
 
 <!DOCTYPE html>
@@ -32,22 +31,18 @@
         <table id="datatable" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
+                    <th>Curp</th>
+                    <th>Apellido Paterno</th>
+                    <th>Apellido Materno</th>
+                    <th>Nombres</th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
+                    <th>Curp</th>
+                    <th>Apellido Paterno</th>
+                    <th>Apellido Materno</th>
+                    <th>Nombres</th>
                 </tr>
             </tfoot>
         </table>
@@ -59,9 +54,29 @@
 
 
 @section scripts {
+ 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#datatable').DataTable();
+            $('#datatable').DataTable({
+                ajax:
+                {
+                    url: "RenapoData?wordKey=@x",
+                    type: "GET",   // you can probably remove this
+                    dataSrc : "DataJson",
+                    datatype: "json",   // you can probably remove this
+                },
+                columns: [
+                    { data: "Curp" },
+                    { data: "Apellido1" },
+                    { data: "Apellido2" },
+                    { data: "Nombres" },
+
+                ]
+            });
         });
     </script>
+
+
+
+
 }
