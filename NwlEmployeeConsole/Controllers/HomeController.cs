@@ -34,15 +34,21 @@ namespace NwlEmployeeConsole.Controllers
             return View();
         }
 
-
-        public IActionResult Search(string wordKey)
+        ///[HttpGet]
+        public IActionResult Search(SearchModel model)
         {
-            var model = new SearchModel
-            {
-                WordKey = wordKey
-            };
 
-            return View(model);
+            if (!ModelState.IsValid)
+            {
+
+                return RedirectToAction("Error");
+            }
+            else
+            {
+                
+                return View(model);
+            }
+            
         }
 
         [HttpGet]

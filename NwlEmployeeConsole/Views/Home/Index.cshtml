@@ -4,7 +4,13 @@
 
 @using (Html.BeginForm("Search", "Home", FormMethod.Post))
 {
-    <input id="wordKey" type="text" name="wordKey">
-    <input type="submit" value="ok">
+<body>
+    <input id="wordKey" type="text" name="wordKey" required placeholder="CURP only (18 chars)">
+    <input type="submit" value="Search" class="btn btn-primary">
+    <h2>Resultados</h2>
+    @Html.ActionLink("Resultados", "SearchResults")
+    
+</body>
+    
 
 }
