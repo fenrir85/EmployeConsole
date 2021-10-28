@@ -17,16 +17,17 @@ namespace NwlEmployeeConsole.Bussines
         {
             var htmlDoc = new HtmlDocument();
             var client = new WebClient();
+            //client.Encoding = Encoding.Unicode;
             Uri uri = new Uri($"http://www.renapo.sep.gob.mx/wsrenapo/MainControllerParam?curp={curp}");
             Stream data = client.OpenRead(uri);
-            StreamReader reader = new StreamReader(data);
+            StreamReader reader = new StreamReader(data, Encoding.GetEncoding("iso-8859-1"), true);
             string s = reader.ReadToEnd();
             htmlDoc.LoadHtml(s);
             var htmlBody = htmlDoc.DocumentNode.SelectSingleNode("//body//table");
             var text = htmlBody.InnerText.ToString();
             string[] datos = text.Split("\r\n");
-            var s2 = datos[17].Trim();
-            var ap2 = Encoding.GetEncoding("iso-8859-1").GetString(Encoding.GetEncoding("iso-8859-1").GetBytes(s2));
+            //var s2 = datos[17].Trim();
+            //var ap2 = Encoding.GetEncoding("iso-8859-1").GetString(Encoding.GetEncoding("iso-8859-1").GetBytes(s2));
 
             List<Renapo> renapoList = new List<Renapo>();
 
@@ -34,7 +35,7 @@ namespace NwlEmployeeConsole.Bussines
             {
                 AnioReg = datos[8].Trim(),
                 Apellido1 = datos[13].Trim(),
-                Apellido2 = ap2,
+                Apellido2 = datos[17].Trim(), //ap2,
                 Crip = datos[21].Trim(),
                 Curp = datos[25].Trim(),
                 CveEntidadEmisora = datos[29].Trim(),
